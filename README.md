@@ -25,3 +25,10 @@ try to be a general substitution cipher.
 - Shifts larger than 26 (or smaller than -26) are reduced modulo 26.
 - Fractional shifts are truncated toward zero.
 - Passing a non-string `text` or a non-finite `shift` throws a `TypeError`.
+
+## Performance
+
+The window keeps a bounded buffer, so `push` is constant time and memory does not
+grow with the length of the stream. `peak` and `trough` are linear in the window
+size, which is the trade that keeps `push` cheap.
+
